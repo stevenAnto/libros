@@ -65,8 +65,7 @@ La aplicación tiene las siguientes funcionalidades:
 El código fuente de este proyecto está disponible en el siguiente repositorio de GitHub: [repositorio](https://github.com/stevenAnto/libros.git).
 
 Para clonar el repositorio, puedes utilizar el siguiente comando Git en tu terminal:
-```git clone https://github.com/stevenAnto/libros.git
-```
+```git clone https://github.com/stevenAnto/libros.git```
 Una vez clonado el repositorio, puedes importar el proyecto en tu IDE de preferencia y seguir las instrucciones de configuración del entorno de desarrollo en el archivo README.md del repositorio.
 
 Si tienes alguna pregunta o necesitas ayuda con la configuración, no dudes en contactar al equipo de desarrollo.
