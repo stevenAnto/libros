@@ -11,7 +11,6 @@
 * [Características de la aplicación y demostración](#características-de-la-aplicación-y-demostración)
 * [Acceso al proyecto](#acceso-al-proyecto)
 * [Tecnologías utilizadas](#tecnologías-utilizadas)
-* [Personas Contribuyentes](#personas-contribuyentes)
 * [Personas Desarrolladores del Proyecto](#personas-desarrolladores)
 * [Licencia](#licencia)
 
@@ -84,9 +83,6 @@ La aplicación LiterAlura está construida con las siguientes tecnologías:
 - **Postgres**: Versión 16 en adelante. [Descargar PostgreSQL](https://www.postgresql.org/download/)
 - **IDE (Entorno de desarrollo integrado)**: IntelliJ IDEA (opcional). [Descargar IntelliJ IDEA](https://www.jetbrains.com/idea/)
 
-## Personas Contribuyentes
-
-Lista de personas que han contribuido al proyecto.
 
 ## Personas Desarrolladores del Proyecto
 
