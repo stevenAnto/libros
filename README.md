@@ -14,7 +14,6 @@
 * [Personas Contribuyentes](#personas-contribuyentes)
 * [Personas Desarrolladores del Proyecto](#personas-desarrolladores)
 * [Licencia](#licencia)
-* [Conclusión](#conclusión)
 
 ## Descripción del proyecto
 
@@ -95,4 +94,4 @@ Esteven Antonio Calcina Puma
 
 ## Licencia
 
-Este proyecto está licenciado bajo los términos de la [Licencia MIT](LICENSE).
+Este proyecto está licenciado bajo los términos de la [Licencia MIT](https://choosealicense.com/licenses/mit/).
