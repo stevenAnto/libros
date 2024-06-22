@@ -13,11 +13,11 @@ public class Book {
     private Long id;
     @Column(unique = true)
     private String titulo;
-    @Transient
-    private List<Autor> autores;
     @Enumerated(EnumType.STRING)
     private Idiomas idioma;
     private Integer numeroDescargas;
+    @OneToMany(mappedBy = "book",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Autor> autores;
 
     public Book() {
 
@@ -51,6 +51,7 @@ public class Book {
     }
 
     public void setAutores(List<Autor> autores) {
+        autores.forEach(a->a.setBook(this));
         this.autores = autores;
     }
 

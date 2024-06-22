@@ -1,14 +1,45 @@
 package com.example.demo.models;
 
+import jakarta.persistence.*;
+import org.hibernate.grammars.hql.HqlParser;
+
+@Entity
+@Table(name = "autores")
 public class Autor {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long Id;
     private  String name;
     private Integer birhtDay;
     private Integer deathDay;
+    @ManyToOne
+    private Book book;
+
+    public Autor(DatosAutor autor) {
+        this.name = autor.name();
+        this.birhtDay = autor.birthYear();
+        this.deathDay = autor.deathYear();
+    }
 
     public Autor() {
-        this.name = name;
-        this.birhtDay = birhtDay;
-        this.deathDay = deathDay;
+
+    }
+
+    public Book getBook() {
+        return book;
+    }
+
+    public void setBook(Book book) {
+        this.book = book;
+    }
+
+    @Override
+    public String toString() {
+        return
+
+                " name='" + name + '\'' +
+                ", birhtDay=" + birhtDay +
+                ", deathDay=" + deathDay ;
     }
 
     public String getName() {

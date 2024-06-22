@@ -1,14 +1,14 @@
 package com.example.demo.Principal;
 
-import com.example.demo.models.Book;
-import com.example.demo.models.DatosBook;
-import com.example.demo.models.DatosConsulta;
+import com.example.demo.models.*;
 import com.example.demo.reposotory.BookRepository;
 import com.example.demo.services.ConsumoAPI;
 import com.example.demo.services.ConvierteDatos;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class Principal {
     private Scanner teclado = new Scanner(System.in);
@@ -27,6 +27,10 @@ public class Principal {
             var menu = """
                     1- Buscar libro por titulo
                     2- Listar todos los libros consultados
+                    3- Listar autores registrados
+                    4- Listar autores en un determinado anio
+                    5- Listr libros por idioma
+                    0- Salir
                     """;
             System.out.println(menu);
             opcion = teclado.nextInt();
@@ -38,6 +42,12 @@ public class Principal {
                 case 2:
                     listarLibros();
                     break;
+                case 3:
+                    listarAutores();
+                case 4:
+                    autoreDeterminadosanio();
+                case 5:
+                    buscarLibroPorIdioma();
                 case 0:
                     System.out.println("Cerrando aplicacion");
                     break;
@@ -46,6 +56,7 @@ public class Principal {
             }
         }
     }
+
 
     private DatosConsulta getDatosConsulta(){
         System.out.println("Escriba el nombre del titulo que desea buscar");
@@ -68,15 +79,30 @@ public class Principal {
         else {
             System.out.println("Todos "+ datosConsulta);
             DatosBook bookBuscado = datosConsulta.datosBook().get(0);
+            List<DatosAutor> autoresDatos= bookBuscado.autores();
+            List<Autor> autores = autoresDatos.stream()
+                    .map(a->new Autor(a))
+                    .collect(Collectors.toList());
             Book book = new Book(bookBuscado);
+            book.setAutores(autores);
             System.out.println("el pripmero es");
             System.out.println(book);
             repository.save(book);
         }
     }
+
     private void listarLibros() {
         List<Book> books = repository.findAll();
         books.forEach(System.out::println);
     }
+    private void buscarLibroPorIdioma() {
+    }
 
+    private void autoreDeterminadosanio() {
+    }
+
+    private void listarAutores() {
+        List<Autor> autores= repository.getTotalAutores();
+        autores.forEach(System.out::println);
+    }
 }
