@@ -44,15 +44,19 @@ public class Principal {
                     break;
                 case 3:
                     listarAutores();
+                    break;
                 case 4:
                     autoreDeterminadosanio();
+                    break;
                 case 5:
                     buscarLibroPorIdioma();
+                    break;
                 case 0:
                     System.out.println("Cerrando aplicacion");
                     break;
                 default:
                     System.out.println("Opcion invalida");
+                    break;
             }
         }
     }
@@ -96,9 +100,28 @@ public class Principal {
         books.forEach(System.out::println);
     }
     private void buscarLibroPorIdioma() {
+        System.out.println("Escriba el idioma");
+        var inputIdioma = teclado.nextLine();
+        var idioma  = Idiomas.fromString(inputIdioma);
+        List<Book> booksPorIdioma = repository.findByIdioma(idioma);
+        System.out.println("Las series encontradas son");
+        booksPorIdioma.forEach(System.out::println);
     }
 
     private void autoreDeterminadosanio() {
+        System.out.println("Ingrese el anio el cual desea buscar");
+        var anioBuscado = teclado.nextLine();
+        try {
+            Integer anioValido = Integer.parseInt(anioBuscado);
+            buscarAutorePorAnio(anioValido);
+        } catch (NumberFormatException e) {
+            System.out.println("Entrada inválida. Por favor ingrese un número entero.");
+        }
+    }
+    private void buscarAutorePorAnio(Integer anio){
+        List<Autor> autores = repository.autoresVivvos(anio);
+        System.out.println("Estos se encontraron");
+        autores.forEach(System.out::println);
     }
 
     private void listarAutores() {
