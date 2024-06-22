@@ -3,8 +3,9 @@ package com.example.demo.Principal;
 import com.example.demo.models.Book;
 import com.example.demo.models.DatosBook;
 import com.example.demo.models.DatosConsulta;
-import services.ConsumoAPI;
-import services.ConvierteDatos;
+import com.example.demo.reposotory.BookRepository;
+import com.example.demo.services.ConsumoAPI;
+import com.example.demo.services.ConvierteDatos;
 
 import java.util.Scanner;
 
@@ -13,6 +14,11 @@ public class Principal {
     private ConsumoAPI consumoApi = new ConsumoAPI();
     private final String URL_BASE = "http://gutendex.com/books/?search=";
     private ConvierteDatos conversor = new ConvierteDatos();
+    private BookRepository repository;
+
+    public Principal(BookRepository repository) {
+        this.repository = repository;
+    }
 
     public void mostrarMenu() {
         var opcion = -1;
@@ -51,15 +57,23 @@ public class Principal {
         return  datosConsulta;
 
     }
-    private void listarLibros() {
-    }
 
     private void buscarPorTitulo() {
         DatosConsulta datosConsulta = getDatosConsulta();
-        System.out.println("Todos "+ datosConsulta);
-        DatosBook bookBuscado = datosConsulta.datosBook().get(0);
-        Book book = new Book(bookBuscado);
-        System.out.println("el pripmero es");
-        System.out.println(book);
+        if(datosConsulta.count()==0){
+            System.out.println("Lo siento, no se encontro ninguan coincidencia");
+            System.out.println("*******************");
+        }
+        else {
+            System.out.println("Todos "+ datosConsulta);
+            DatosBook bookBuscado = datosConsulta.datosBook().get(0);
+            Book book = new Book(bookBuscado);
+            System.out.println("el pripmero es");
+            System.out.println(book);
+            repository.save(book);
+        }
     }
+    private void listarLibros() {
+    }
+
 }

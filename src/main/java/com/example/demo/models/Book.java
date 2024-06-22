@@ -1,28 +1,41 @@
 package com.example.demo.models;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
+import jakarta.persistence.*;
 
 import java.util.List;
 
+@Entity
+@Table(name="books")
 public class Book {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @Column(unique = true)
     private String titulo;
+    @Transient
     private List<Autor> autores;
-    private List<String> idiomas;
+    @Enumerated(EnumType.STRING)
+    private Idiomas idioma;
     private Integer numeroDescargas;
+
+    public Book() {
+
+    }
 
     @Override
     public String toString() {
         return
                 "titulo='" + titulo + '\'' +
                 ", autores=" + autores +
-                ", idiomas=" + idiomas +
+                ", idiomas=" + idioma +
                 ", numeroDescargas=" + numeroDescargas
                 ;
     }
 
     public Book(DatosBook datosBook) {
         this.titulo = datosBook.titulo();
-        this.idiomas = datosBook.idiomas();
+        this.idioma = Idiomas.fromString(datosBook.idiomas().get(0));
         this.numeroDescargas = datosBook.descargas();
     }
     public String getTitulo() {
@@ -39,14 +52,6 @@ public class Book {
 
     public void setAutores(List<Autor> autores) {
         this.autores = autores;
-    }
-
-    public List<String> getIdiomas() {
-        return idiomas;
-    }
-
-    public void setIdiomas(List<String> idiomas) {
-        this.idiomas = idiomas;
     }
 
     public Integer getNumeroDescargas() {
