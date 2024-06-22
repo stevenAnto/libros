@@ -7,6 +7,7 @@ import com.example.demo.reposotory.BookRepository;
 import com.example.demo.services.ConsumoAPI;
 import com.example.demo.services.ConvierteDatos;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class Principal {
@@ -50,7 +51,7 @@ public class Principal {
         System.out.println("Escriba el nombre del titulo que desea buscar");
         var nombreTitulo = teclado.nextLine();
         String urlBuscada= URL_BASE+nombreTitulo.replace(" ","%20");
-        System.out.println("sy consutlaa e "+urlBuscada);
+        System.out.println("su consulta es "+urlBuscada);
         var json = consumoApi.obtenerDatos(urlBuscada);
         System.out.println("Resultado de la busqueda "+json);
         DatosConsulta datosConsulta = conversor.obtenerDatos(json,DatosConsulta.class);
@@ -74,6 +75,8 @@ public class Principal {
         }
     }
     private void listarLibros() {
+        List<Book> books = repository.findAll();
+        books.forEach(System.out::println);
     }
 
 }
