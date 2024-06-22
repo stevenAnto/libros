@@ -26,10 +26,12 @@ public class Book {
     @Override
     public String toString() {
         return
-                "titulo='" + titulo + '\'' +
-                ", autores=" + autores +
-                ", idiomas=" + idioma +
-                ", numeroDescargas=" + numeroDescargas
+                "\n*********LIBRO********************\n" +
+                        "titulo:'" + titulo + '\'' +"\n"+
+                " autores:" + autores +"\n"+
+                " idiomas:" + idioma +"\n"+
+                " numeroDescargas:" + numeroDescargas+"\n"+
+                        "*****************************\n"
                 ;
     }
 

@@ -15,6 +15,6 @@ public enum Idiomas {
                 return  i;
             }
         }
-        throw  new IllegalArgumentException("Ninguna categoria para "+txt);
+        throw  new IllegalArgumentException("No hay idioma para "+txt);
     }
 }

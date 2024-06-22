@@ -66,7 +66,7 @@ public class Principal {
         System.out.println("Escriba el nombre del titulo que desea buscar");
         var nombreTitulo = teclado.nextLine();
         String urlBuscada= URL_BASE+nombreTitulo.replace(" ","%20");
-        System.out.println("su consulta es "+urlBuscada);
+        System.out.println("Su consulta es "+urlBuscada);
         var json = consumoApi.obtenerDatos(urlBuscada);
         System.out.println("Resultado de la busqueda "+json);
         DatosConsulta datosConsulta = conversor.obtenerDatos(json,DatosConsulta.class);
@@ -77,11 +77,11 @@ public class Principal {
     private void buscarPorTitulo() {
         DatosConsulta datosConsulta = getDatosConsulta();
         if(datosConsulta.count()==0){
-            System.out.println("Lo siento, no se encontro ninguan coincidencia");
+            System.out.println("\nLo siento, no se encontro ninguan coincidencia\n");
             System.out.println("*******************");
         }
         else {
-            System.out.println("Todos "+ datosConsulta);
+            System.out.println("Encontrados "+ datosConsulta);
             DatosBook bookBuscado = datosConsulta.datosBook().get(0);
             List<DatosAutor> autoresDatos= bookBuscado.autores();
             List<Autor> autores = autoresDatos.stream()
@@ -89,7 +89,7 @@ public class Principal {
                     .collect(Collectors.toList());
             Book book = new Book(bookBuscado);
             book.setAutores(autores);
-            System.out.println("el pripmero es");
+            System.out.println("El pripmero es");
             System.out.println(book);
             repository.save(book);
         }
@@ -100,12 +100,22 @@ public class Principal {
         books.forEach(System.out::println);
     }
     private void buscarLibroPorIdioma() {
+        String opcionesIdioomas= """
+                es - español
+                en - inglés
+                """;
         System.out.println("Escriba el idioma");
+        System.out.println(opcionesIdioomas);
         var inputIdioma = teclado.nextLine();
-        var idioma  = Idiomas.fromString(inputIdioma);
-        List<Book> booksPorIdioma = repository.findByIdioma(idioma);
-        System.out.println("Las series encontradas son");
-        booksPorIdioma.forEach(System.out::println);
+        Idiomas idioma;
+        try{
+            idioma  = Idiomas.fromString(inputIdioma);
+            List<Book> booksPorIdioma = repository.findByIdioma(idioma);
+            System.out.println("Las series encontradas son");
+            booksPorIdioma.forEach(System.out::println);
+        }catch (IllegalArgumentException e){
+            System.out.println("input invalido");
+        }
     }
 
     private void autoreDeterminadosanio() {

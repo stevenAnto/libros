@@ -36,10 +36,10 @@ public class Autor {
     @Override
     public String toString() {
         return
-
-                " name='" + name + '\'' +
-                ", birhtDay=" + birhtDay +
-                ", deathDay=" + deathDay ;
+                "\n***************Autor***************\n"+
+                " name='" + name + '\'' +"\n"+
+                " birhtDay=" + birhtDay +"\n"+
+                " deathDay=" + deathDay +"\n";
     }
 
     public String getName() {
